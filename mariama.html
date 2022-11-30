@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="maya.css" />
+    <style>
+      h2 {
+        color: white;
+        border: 2px solid rgb(211, 149, 69);
+        border-radius: 12px;
+        padding: 5px;
+        background-color: #3d2802;
+        width: 200px;
+      }
+      body {
+        background-color: #422d05;
+        text-align: center;
+        background-image: url("maron.jpg");
+        background-size: 800px;
+        background-position: 300px;
+      }
+
+      label {
+        color: white;
+      }
+
+      input[type="text"],
+      select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        background-color: #a5700f;
+        color: white;
+        padding: 14px 50px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      ::placeholder {
+        text-align: center;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #4d3303;
+      }
+
+      #maya {
+        border-radius: 5px;
+        background-color: burlywood;
+        border-radius: 5px;
+        padding: 20px;
+        width: 40%;
+        height: 380px;
+        text-align: center;
+      }
+      #maya {
+        height: 200px;
+        background-color: burlywood;
+        background-image: linear-gradient(
+          rgba(168, 105, 9, 0.589),
+          rgba(255, 198, 40, 0.795)
+        );
+        width: 40%;
+        height: 380px;
+        border: 3px solid rgb(243, 181, 100);
+
+        position: absolute;
+
+        left: 50%;
+
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+        -webkit-transform: translate(-50%, -50%);
+      }
+
+      #CALCULATRICE {
+        width: 200px;
+        height: 33px;
+        background-color: #976200;
+        animation-name: example;
+        animation-duration: 10s;
+      }
+
+      @keyframes example {
+        from {
+          background-color: rgba(138, 101, 0, 0.925);
+        }
+        to {
+          background-color: rgba(175, 123, 10, 0.781);
+        }
+        to {
+          background-color: #a16f12;
+        }
+        to {
+          background-color: #83580a;
+        }
+        to {
+          background-color: #5c3e08;
+        }
+        to {
+          background-color: #422d05;
+        }
+        to {
+          background-color: #5c3e08;
+        }
+        to {
+          background-color: #a16f12;
+        }
+      }
+      #rlt {
+        width: 186px;
+        height: 40px;
+        margin-top: 10%;
+      }
+
+      .centre {
+        width: 100;
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+    <script>
+      function check() {
+        var a = document.frm.a.value;
+        var b = document.frm.b.value;
+
+        if (isNaN(a, b)) {
+          document.getElementById("error1").innerHTML =
+            "Veuillez entrer une valeur numérique !";
+          document.getElementById("error2").innerHTML =
+            "Veuillez entrer une valeur numérique !";
+          return false;
+        } else {
+          return true;
+        }
+      }
+
+      function envoyer(event) {
+        event.preventDefault();
+        let a = document.getElementById("input1").value;
+        let b = document.getElementById("input2").value;
+        if (a == "" || b == "") {
+          alert("Veuillez remplir tous les champs");
+          return true;
+        }
+        a = Number(a);
+        b = Number(b);
+        if (b == 0) {
+          alert("La division par zéro est impossible");
+          return true;
+        }
+
+        while (isNaN(a) || isNaN(b)) {
+          return true;
+        }
+
+        let somme = a + b;
+        let difference = a - b;
+        let multi = a * b;
+        let division = a / b;
+        let mod = a % b;
+        let afficher =
+          "La somme est de: " +
+          somme +
+          "\n" +
+          "La difference est de: " +
+          difference +
+          "\n" +
+          "La multiplication est de: " +
+          multi +
+          "\n" +
+          "La division est de: " +
+          division +
+          "\n" +
+          "La reste est de: " +
+          mod;
+        alert(afficher);
+      }
+
+      function checkInput(event) {
+        let lettre = Number(event.data);
+        if (isNaN(lettre)) {
+          if (event.srcElement.id == "input1") {
+            document.getElementById("error1").innerHTML =
+              "Veuillez entrer une valeur numérique !";
+          } else {
+            document.getElementById("error2").innerHTML =
+              "Veuillez entrer une valeur numérique !";
+          }
+        } else {
+          if (event.srcElement.id == "input1") {
+            document.getElementById("error1").innerHTML = "";
+          } else {
+            document.getElementById("error2").innerHTML = "";
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="centre"><h2 id="CALCULATRICE">CALCULATRICE</h2></div>
+    <div id="maya">
+      <form name="frm" onsubmit="return check()">
+        <label for="a"><h3>Saisissez le second nombre:</h3></label><br />
+        <input
+          type="text"
+          placeholder="veuillez entrer un nombre"
+          name="a"
+          id="input1"
+          oninput="checkInput(event)"
+          required
+        />
+        <br />
+        <span id="error1" style="color: red"> </span>
+
+        <label for="a"><h3>Saisissez le second nombre:</h3> </label><br />
+        <input
+          type="text"
+          placeholder="veuillez entrer un nombre"
+          name="b"
+          id="input2"
+          oninput="checkInput(event)"
+          required
+        />
+        <br />
+        <span id="error2" style="color: red"></span><br />
+
+        <input
+          type="submit"
+          value="Calculer"
+          onclick="envoyer(event)"
+          name="rlt"
+          id="rlt"
+        /><br />
+      </form>
+    </div>
+  </body>
+</html>
